@@ -1,249 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zozo 🌸 My Valentine</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zozo 🌸 My Valentine</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <!-- Handwritten Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{
-  font-family:'Pacifico', cursive;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  background: linear-gradient(135deg,#fde2e4,#fadadd,#e2ece9);
-  background-size:400% 400%;
-  animation:gradientShift 20s ease infinite;
-  overflow-x:hidden;
-  padding:15px;
-}
-@keyframes gradientShift{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Proposal Slide */
-.proposal{
-  text-align:center;
-  background: rgba(255,255,255,0.65);
-  backdrop-filter:blur(8px);
-  padding:25px 20px;
-  border-radius:20px;
-  box-shadow:0 15px 30px rgba(0,0,0,0.15);
-  max-width:95%;
-  width:350px;
-  margin-top:30px;
-}
-.proposal h1{color:#ff6f91;font-size:1.7rem;margin-bottom:12px;}
-.proposal p{color:#555;font-size:1rem;margin-bottom:15px;}
-button{
-  padding:12px 22px;
-  font-size:1rem;
-  border:none;
-  border-radius:35px;
-  cursor:pointer;
-  margin:8px;
-  transition:0.3s;
-}
-button:active{transform:scale(0.95);}
-#yes{background:#ff9aa2;color:white;}
-#no{background:#fff;color:#ff6f91;position:relative;}
+    body {
+      font-family: 'Pacifico', cursive;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #fde2e4, #fadadd, #e2ece9);
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
+      overflow-x: hidden;
+      padding: 15px;
+      cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32"><text y="24" font-size="32">💗</text></svg>'), auto;
+    }
 
-/* Gift Container */
-.gift-container{
-  display:none;
-  flex-direction:column;
-  align-items:center;
-  width:100%;
-  max-width:400px;
-  margin-top:20px;
-}
-.gift-container h1{color:#ff6f91;text-align:center;margin-bottom:10px;}
-.gifts{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  width:100%;
-}
-.gift{
-  background:#fff0f5;
-  border-radius:20px;
-  width:120px;
-  height:140px;
-  margin:10px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 10px 20px rgba(0,0,0,0.15);
-  cursor:pointer;
-  transition:0.3s;
-  position:relative;
-}
-.gift:hover{transform:scale(1.05);box-shadow:0 15px 25px rgba(0,0,0,0.25);}
-.gift h2{font-size:1.2rem;color:#ff6f91;margin-bottom:5px;}
-.gift-content{
-  display:none;
-  margin-top:10px;
-  text-align:center;
-  font-size:0.95rem;
-  color:#555;
-  background:rgba(255,255,255,0.8);
-  border-radius:15px;
-  padding:10px;
-  box-shadow:0 8px 15px rgba(0,0,0,0.1);
-}
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-/* Hearts */
-.heart{
-  position:fixed;
-  bottom:-20px;
-  font-size:18px;
-  animation:floatUp linear forwards;
-  pointer-events:none;
-  z-index:1;
-}
-@keyframes floatUp{to{transform:translateY(-110vh) rotate(360deg);opacity:0;}}
+    .container {
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(8px);
+      padding: 25px 20px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 95%;
+      width: 100%;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+      position: relative;
+      z-index: 2;
+    }
 
-/* Mobile responsive */
-@media(max-width:480px){
-  h1{font-size:1.4rem;}
-  p{font-size:0.95rem;}
-  button{padding:10px 18px;font-size:0.95rem;}
-  .gifts{flex-direction:column;align-items:center;}
-  .gift{width:80%;max-width:220px;height:auto;padding:10px;}
-  .gift h2{font-size:1rem;}
-}
-</style>
+    h1 {
+      color: #ff6f91;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+    h1:hover { transform: scale(1.05); }
+
+    p {
+      color: #555;
+      font-size: 1rem;
+      margin-bottom: 12px;
+    }
+
+    .tease {
+      font-size: 0.85rem;
+      color: #ff9aa2;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 12px 22px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 35px;
+      cursor: pointer;
+      margin: 8px;
+      transition: transform 0.15s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    button:active { transform: scale(0.95); }
+
+    #yes {
+      background: #ff9aa2;
+      color: white;
+      box-shadow: 0 0 12px #ff9aa2aa;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 12px #ff9aa2aa; transform: scale(1); }
+      50% { box-shadow: 0 0 22px #ff6f91cc; transform: scale(1.05); }
+    }
+
+    #no {
+      background: #fff;
+      color: #ff6f91;
+      position: absolute;
+    }
+
+    #message {
+      margin-top: 12px;
+      color: #ff6f91;
+      font-size: 1.3rem;
+      min-height: 2em;
+      word-break: break-word;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 18px;
+      animation: floatUp linear forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Love letter popup */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 5;
+      padding: 10px;
+    }
+
+    .letter {
+      background: #fffafc;
+      padding: 20px;
+      border-radius: 18px;
+      max-width: 95%;
+      text-align: left;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+      animation: popIn 0.4s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .letter h2 {
+      color: #ff6f91;
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+
+    .letter p {
+      color: #555;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .close {
+      display: block;
+      margin-top: 12px;
+      text-align: center;
+      background: #ff9aa2;
+      color: white;
+      padding: 8px;
+      border-radius: 18px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      h1 { font-size: 1.5rem; }
+      p { font-size: 0.95rem; }
+      button { padding: 10px 18px; font-size: 0.95rem; }
+      #message { font-size: 1.1rem; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- Background Music -->
-<audio autoplay loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7e29a9c4d0.mp3" type="audio/mpeg">
-</audio>
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7e29a9c4d0.mp3" type="audio/mpeg">
+  </audio>
 
-<!-- Proposal Slide -->
-<div class="proposal" id="proposal">
-  <h1>🌸 My Baby Zozo, will you be my Valentine? 🌸</h1>
-  <p>With you, even the hardest days feel softer and easier to breathe through ✨</p>
-  <div>😏 You already know the answer</div>
-  <button id="yes" onclick="showGifts()">YES 💗</button>
-  <button id="no" onmouseover="moveNo()">NO 🙈</button>
-</div>
+  <div class="container">
+    <h1>🌸 My Baby Zozo, will you be my Valentine? 🌸</h1>
+    <p>With you, even the hardest days feel softer and easier to breathe through ✨</p>
+    <div class="tease">😏 You already know the answer</div>
 
-<!-- Gift Selection -->
-<div class="gift-container" id="giftContainer">
-  <h1>🎁 Choose your gift!</h1>
-  <div class="gifts">
-    <!-- Gift 1 -->
-    <div class="gift" onclick="toggleGift('gift1Content')">
-      <h2>Gift 1 🎲</h2>
-      <div class="gift-content" id="gift1Content">
-        <p>1️⃣ Who is the boss in this relationship?</p>
-        <button class="option-btn" onclick="quizAnswer(this,'correct')">Me</button>
-        <button class="option-btn" onclick="quizAnswer(this,'wrong')">My Girlfriend</button>
-        <button class="option-btn" onclick="quizAnswer(this,'both')">Both ❤️</button>
+    <button id="yes" onclick="yesClick()">YES 💗</button>
+    <button id="no" onmouseover="moveNo()">NO 🙈</button>
 
-        <p>2️⃣ Who makes the best food?</p>
-        <button class="option-btn" onclick="quizAnswer(this,'correct')">My Girlfriend</button>
-        <button class="option-btn" onclick="quizAnswer(this,'wrong')">Me</button>
-        <button class="option-btn" onclick="quizAnswer(this,'both')">Both 🍴</button>
-      </div>
-    </div>
+    <div id="message"></div>
+  </div>
 
-    <!-- Gift 2 -->
-    <div class="gift" onclick="toggleGift('gift2Content')">
-      <h2>Gift 2 💌</h2>
-      <div class="gift-content" id="gift2Content">
-        <p>From the moment you came into my life, everything felt brighter and warmer. You complete me in ways I never knew I was missing. You’re my safe place, my comfort, my baby, and my best part. Every smile, laugh, and second with you means more than I could put into words. 💖</p>
-      </div>
-    </div>
-
-    <!-- Gift 3 -->
-    <div class="gift" onclick="toggleGift('gift3Content')">
-      <h2>Gift 3 🌸</h2>
-      <div class="gift-content" id="gift3Content">
-        <p>💐 A little flower just for you, my love! 🌸</p>
-      </div>
+  <!-- Love Letter Popup -->
+  <div class="overlay" id="overlay">
+    <div class="letter">
+      <h2>💌 My Dearest Zozo</h2>
+      <p>From the moment you came into my life, everything felt a little brighter and a lot warmer. You have this beautiful way of making even the simplest moments feel special, and I don’t think you realize just how much happiness you bring into my world. You complete me in ways I never even knew I was missing.</p>
+      <p>You’re my safe place, my comfort, my baby, and my best part. Every smile, every laugh, every second with you means more to me than I could ever fully put into words.
+You mean so much to me, and I’m endlessly grateful for your love, your heart, and everything that makes you you. I love you deeply, endlessly, and always will. You truly mean the world to me.</p>
+      <p>💖 Yours, always.</p>
+      <div class="close" onclick="closeLetter()">Close 💕</div>
     </div>
   </div>
-</div>
 
-<script>
-// Show gifts after YES
-function showGifts(){
-  document.getElementById('proposal').style.display='none';
-  const container=document.getElementById('giftContainer');
-  container.style.display='flex'; // explicit flex for mobile
-  container.style.flexDirection='column';
-  container.style.alignItems='center';
-}
+  <script>
+    // Typing effect for message
+    function typeMessage(text, elementId) {
+      let i = 0;
+      const el = document.getElementById(elementId);
+      el.innerHTML = "";
+      const interval = setInterval(() => {
+        el.innerHTML += text[i];
+        i++;
+        if (i >= text.length) clearInterval(interval);
+      }, 50);
+    }
 
-// Toggle gift content
-function toggleGift(id){
-  const content=document.getElementById(id);
-  content.style.display = content.style.display==='block'?'none':'block';
-}
+    // Random love quotes
+    const compliments = [
+      "You’re my sunshine ☀️",
+      "Your smile is my favorite 💕",
+      "Being with you feels like magic ✨",
+      "You make my heart skip a beat 💗",
+      "Every moment with you is precious 🥰"
+    ];
+    setInterval(() => {
+      const msg = compliments[Math.floor(Math.random() * compliments.length)];
+      document.getElementById("message").innerHTML = msg;
+    }, 10000);
 
-// Quiz feedback
-function quizAnswer(btn,type){
-  event.stopPropagation(); // prevent parent toggle
-  if(type==='correct'){btn.innerHTML+=' ✅'; btn.style.background='#ff9aa2';} 
-  else if(type==='wrong'){btn.innerHTML+=' ❌'; btn.style.background='#ffd1dc';} 
-  else {btn.innerHTML+=' ❤️'; btn.style.background='#ffb7c5';}
-}
+    function yesClick() {
+      typeMessage("🥰 I knew it… I love you, Zozo 💕", "message");
+      document.getElementById("overlay").style.display = "flex";
+      for (let i = 0; i < 25; i++) createHeart();
+    }
 
-// NO button moves
-function moveNo(){
-  const noBtn=document.getElementById('no');
-  const maxX=window.innerWidth-noBtn.offsetWidth-10;
-  const maxY=window.innerHeight-noBtn.offsetHeight-10;
-  const x=Math.random()*maxX;
-  const y=Math.random()*maxY;
-  noBtn.style.left=x+'px';
-  noBtn.style.top=y+'px';
-}
+    function closeLetter() {
+      document.getElementById("overlay").style.display = "none";
+    }
 
-// Floating hearts
-function createHeart(){
-  const heart=document.createElement('div');
-  heart.className='heart';
-  heart.innerHTML='💗';
-  const colors=["#ff9aa2","#ffd1dc","#fff1f3","#ffb7c5"];
-  heart.style.color=colors[Math.floor(Math.random()*colors.length)];
-  heart.style.left=Math.random()*100+'vw';
-  heart.style.fontSize=Math.random()*18+14+'px';
-  heart.style.animationDuration=Math.random()*3+3+'s';
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),6000);
-}
-setInterval(createHeart,400);
+    // NO button moves randomly inside screen
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+      const maxX = window.innerWidth - noBtn.offsetWidth - 10;
+      const maxY = window.innerHeight - noBtn.offsetHeight - 10;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
 
-// Click heart bursts
-document.addEventListener('click', e=>{
-  for(let i=0;i<5;i++){
-    const heart=document.createElement('div');
-    heart.className='heart';
-    heart.innerHTML='💖';
-    const colors=["#ff9aa2","#ffd1dc","#fff1f3","#ffb7c5"];
-    heart.style.color=colors[Math.floor(Math.random()*colors.length)];
-    heart.style.left=e.clientX+(Math.random()*40-20)+'px';
-    heart.style.top=e.clientY+(Math.random()*40-20)+'px';
-    heart.style.fontSize=Math.random()*14+10+'px';
-    heart.style.animationDuration=Math.random()*1.5+1+'s';
-    heart.style.transform=`rotate(${Math.random()*360}deg)`;
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),2000);
-  }
-});
-</script>
+    // Floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💗";
+      const colors = ["#ff9aa2", "#ffd1dc", "#fff1f3", "#ffb7c5"];
+      heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 16 + 12 + "px";
+      heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 400);
+
+    // Click heart bursts
+    document.addEventListener("click", (e) => {
+      for (let i = 0; i < 7; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        const colors = ["#ff9aa2", "#ffd1dc", "#fff1f3", "#ffb7c5"];
+        heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+        heart.style.left = e.clientX + (Math.random() * 40 - 20) + "px";
+        heart.style.top = e.clientY + (Math.random() * 40 - 20) + "px";
+        heart.style.fontSize = Math.random() * 14 + 10 + "px";
+        heart.style.animationDuration = Math.random() * 1.5 + 1 + "s";
+        heart.style.transform = `rotate(${Math.random()*360}deg)`;
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+      }
+    });
+  </script>
 
 </body>
 </html>
-
