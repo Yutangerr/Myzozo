@@ -8,28 +8,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
-* { box-sizing:border-box; margin:0; padding:0; }
-body {
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
   font-family:'Pacifico', cursive;
   min-height:100vh;
   display:flex;
   justify-content:center;
-  align-items:center;
-  background: linear-gradient(135deg, #fde2e4, #fadadd, #e2ece9);
-  background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite;
+  align-items:flex-start;
+  background: linear-gradient(135deg,#fde2e4,#fadadd,#e2ece9);
+  background-size:400% 400%;
+  animation:gradientShift 20s ease infinite;
   overflow-x:hidden;
   padding:15px;
-  cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32"><text y="24" font-size="32">💗</text></svg>'), auto;
 }
-@keyframes gradientShift {
+@keyframes gradientShift{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
 
 /* Proposal Slide */
-.proposal {
+.proposal{
   text-align:center;
   background: rgba(255,255,255,0.65);
   backdrop-filter:blur(8px);
@@ -38,6 +37,7 @@ body {
   box-shadow:0 15px 30px rgba(0,0,0,0.15);
   max-width:95%;
   width:350px;
+  margin-top:30px;
 }
 .proposal h1{color:#ff6f91;font-size:1.7rem;margin-bottom:12px;}
 .proposal p{color:#555;font-size:1rem;margin-bottom:15px;}
@@ -54,22 +54,23 @@ button:active{transform:scale(0.95);}
 #yes{background:#ff9aa2;color:white;}
 #no{background:#fff;color:#ff6f91;position:relative;}
 
-/* Gift Selection */
-.gift-container {
-  display:none; /* hidden initially */
-  flex-direction: column;
-  align-items: center;
-  max-width: 95%;
-  width: 100%;
+/* Gift Container */
+.gift-container{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  width:100%;
+  max-width:400px;
+  margin-top:20px;
 }
-.gifts {
+.gift-container h1{color:#ff6f91;text-align:center;margin-bottom:10px;}
+.gifts{
   display:flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  width: 100%;
-  margin-top: 15px;
+  flex-wrap:wrap;
+  justify-content:center;
+  width:100%;
 }
-.gift {
+.gift{
   background:#fff0f5;
   border-radius:20px;
   width:120px;
@@ -81,12 +82,12 @@ button:active{transform:scale(0.95);}
   justify-content:center;
   box-shadow:0 10px 20px rgba(0,0,0,0.15);
   cursor:pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:0.3s;
   position:relative;
 }
-.gift:hover { transform: scale(1.05); box-shadow: 0 15px 25px rgba(0,0,0,0.25);}
-.gift h2{font-size:1.2rem; color:#ff6f91; margin-bottom:5px;}
-.gift-content {
+.gift:hover{transform:scale(1.05);box-shadow:0 15px 25px rgba(0,0,0,0.25);}
+.gift h2{font-size:1.2rem;color:#ff6f91;margin-bottom:5px;}
+.gift-content{
   display:none;
   margin-top:10px;
   text-align:center;
@@ -99,23 +100,23 @@ button:active{transform:scale(0.95);}
 }
 
 /* Hearts */
-.heart {
+.heart{
   position:fixed;
   bottom:-20px;
   font-size:18px;
-  animation: floatUp linear forwards;
+  animation:floatUp linear forwards;
   pointer-events:none;
   z-index:1;
 }
-@keyframes floatUp { to{transform:translateY(-110vh) rotate(360deg); opacity:0;} }
+@keyframes floatUp{to{transform:translateY(-110vh) rotate(360deg);opacity:0;}}
 
-/* Responsive */
+/* Mobile responsive */
 @media(max-width:480px){
   h1{font-size:1.4rem;}
   p{font-size:0.95rem;}
   button{padding:10px 18px;font-size:0.95rem;}
-  .gifts {flex-direction: column; align-items: center;}
-  .gift {width:80%; max-width:220px; height:auto; padding:10px;}
+  .gifts{flex-direction:column;align-items:center;}
+  .gift{width:80%;max-width:220px;height:auto;padding:10px;}
   .gift h2{font-size:1rem;}
 }
 </style>
@@ -178,19 +179,21 @@ button:active{transform:scale(0.95);}
 // Show gifts after YES
 function showGifts(){
   document.getElementById('proposal').style.display='none';
-  const container = document.getElementById('giftContainer');
-  container.style.display = 'flex'; // explicitly flex
+  const container=document.getElementById('giftContainer');
+  container.style.display='flex'; // explicit flex for mobile
+  container.style.flexDirection='column';
+  container.style.alignItems='center';
 }
 
 // Toggle gift content
 function toggleGift(id){
-  const content = document.getElementById(id);
-  content.style.display = content.style.display === 'block' ? 'none' : 'block';
+  const content=document.getElementById(id);
+  content.style.display = content.style.display==='block'?'none':'block';
 }
 
 // Quiz feedback
 function quizAnswer(btn,type){
-  event.stopPropagation(); // prevent parent gift toggle
+  event.stopPropagation(); // prevent parent toggle
   if(type==='correct'){btn.innerHTML+=' ✅'; btn.style.background='#ff9aa2';} 
   else if(type==='wrong'){btn.innerHTML+=' ❌'; btn.style.background='#ffd1dc';} 
   else {btn.innerHTML+=' ❤️'; btn.style.background='#ffb7c5';}
@@ -243,3 +246,4 @@ document.addEventListener('click', e=>{
 
 </body>
 </html>
+
