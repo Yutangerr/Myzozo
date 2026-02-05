@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zozo 🌸 My Valentine</title>
 
+  <!-- Handwritten Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
   <style>
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
+      font-family: 'Pacifico', cursive;
       min-height: 100vh;
-      background: linear-gradient(135deg, #fde2e4, #fadadd, #e2ece9);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: "Comic Sans MS", cursive;
+      background: linear-gradient(135deg, #fde2e4, #fadadd, #e2ece9);
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
       overflow: hidden;
       padding: 20px;
+      cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32"><text y="24" font-size="32">💗</text></svg>'), auto;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .container {
       background: rgba(255,255,255,0.65);
       backdrop-filter: blur(8px);
-      padding: 30px 22px;
+      padding: 30px 25px;
       border-radius: 26px;
       text-align: center;
       max-width: 360px;
       width: 100%;
       box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      position: relative;
       z-index: 2;
     }
 
     h1 {
       color: #ff6f91;
-      font-size: 1.9rem;
-      margin-bottom: 10px;
+      font-size: 2rem;
+      margin-bottom: 12px;
+      transition: transform 0.3s ease;
     }
+    h1:hover { transform: scale(1.05); }
 
     p {
       color: #555;
@@ -57,7 +71,8 @@
       border-radius: 40px;
       cursor: pointer;
       margin: 10px;
-      transition: transform 0.15s ease;
+      transition: transform 0.15s ease, box-shadow 0.3s ease;
+      position: relative;
     }
 
     button:active { transform: scale(0.95); }
@@ -65,6 +80,13 @@
     #yes {
       background: #ff9aa2;
       color: white;
+      box-shadow: 0 0 15px #ff9aa2aa;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 15px #ff9aa2aa; transform: scale(1); }
+      50% { box-shadow: 0 0 25px #ff6f91cc; transform: scale(1.05); }
     }
 
     #no {
@@ -76,10 +98,11 @@
     #message {
       margin-top: 15px;
       color: #ff6f91;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
+      min-height: 2em;
     }
 
-    /* 🌸 Floating hearts */
+    /* Floating hearts */
     .heart {
       position: fixed;
       bottom: -20px;
@@ -90,13 +113,10 @@
     }
 
     @keyframes floatUp {
-      to {
-        transform: translateY(-110vh);
-        opacity: 0;
-      }
+      to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
     }
 
-    /* 💌 Love letter popup */
+    /* Love letter popup */
     .overlay {
       position: fixed;
       inset: 0;
@@ -131,6 +151,7 @@
       color: #555;
       font-size: 0.95rem;
       line-height: 1.5;
+      margin-bottom: 10px;
     }
 
     .close {
@@ -148,6 +169,11 @@
 </head>
 <body>
 
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7e29a9c4d0.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="container">
     <h1>🌸 My Baby Zozo, will you be my Valentine? 🌸</h1>
     <p>With you, even the hardest days feel softer and easier to breathe through ✨</p>
@@ -159,41 +185,65 @@
     <div id="message"></div>
   </div>
 
-  <!-- 💌 Love Letter -->
+  <!-- Love Letter Popup -->
   <div class="overlay" id="overlay">
     <div class="letter">
       <h2>💌 My Dearest Zozo</h2>
-      <p>
-        From the moment you came into my life, everything felt a little brighter and a lot warmer. You have this beautiful way of making even the simplest moments feel special, and I don’t think you realize just how much happiness you bring into my world. You complete me in ways I never even knew I was missing.
-You’re my safe place, my comfort, my baby, and my best part. Every smile, every laugh, every second with you means more to me than I could ever fully put into words.
-      </p>
-      <p>
-        You mean so much to me, and I’m endlessly grateful for your love, your heart, and everything that makes you you. I love you deeply, endlessly, and always will. You truly mean the world to me.
-      </p>
+      <p>From the moment you came into my life, everything felt brighter and warmer. You make even the simplest moments special. You complete me in ways I never knew I was missing.</p>
+      <p>You’re my safe place, my comfort, my baby, and my best part. Every smile, laugh, and second with you means more than I could put into words.</p>
       <p>💖 Yours, always.</p>
       <div class="close" onclick="closeLetter()">Close 💕</div>
     </div>
   </div>
 
   <script>
+    // Typing effect for message
+    function typeMessage(text, elementId) {
+      let i = 0;
+      const el = document.getElementById(elementId);
+      el.innerHTML = "";
+      const interval = setInterval(() => {
+        el.innerHTML += text[i];
+        i++;
+        if (i >= text.length) clearInterval(interval);
+      }, 50);
+    }
+
+    // Random love quotes
+    const compliments = [
+      "You’re my sunshine ☀️",
+      "Your smile is my favorite 💕",
+      "Being with you feels like magic ✨",
+      "You make my heart skip a beat 💗",
+      "Every moment with you is precious 🥰"
+    ];
+    setInterval(() => {
+      const msg = compliments[Math.floor(Math.random() * compliments.length)];
+      document.getElementById("message").innerHTML = msg;
+    }, 10000);
+
     function yesClick() {
-      document.getElementById("message").innerHTML =
-        "🥰 I knew it… I love you, Zozo 💕";
+      typeMessage("🥰 I knew it… I love you, Zozo 💕", "message");
       document.getElementById("overlay").style.display = "flex";
+      for (let i = 0; i < 30; i++) createHeart();
     }
 
     function closeLetter() {
       document.getElementById("overlay").style.display = "none";
     }
 
+    // NO button moves randomly
     function moveNo() {
       const noBtn = document.getElementById("no");
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 120);
+      const maxX = window.innerWidth - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
     }
 
+    // Floating hearts function
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -211,6 +261,26 @@ You’re my safe place, my comfort, my baby, and my best part. Every smile, ever
     }
 
     setInterval(createHeart, 400);
+
+    // Click heart bursts with rotation
+    document.addEventListener("click", (e) => {
+      for (let i = 0; i < 7; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        const colors = ["#ff9aa2", "#ffd1dc", "#fff1f3", "#ffb7c5"];
+        heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+        heart.style.left = e.clientX + (Math.random() * 40 - 20) + "px";
+        heart.style.top = e.clientY + (Math.random() * 40 - 20) + "px";
+        heart.style.fontSize = Math.random() * 16 + 12 + "px";
+        heart.style.animationDuration = Math.random() * 1.5 + 1 + "s";
+        heart.style.transform = `rotate(${Math.random()*360}deg)`;
+
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+      }
+    });
   </script>
 
 </body>
